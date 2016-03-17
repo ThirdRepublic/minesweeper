@@ -1,0 +1,67 @@
+/*
+	Robe Zhang
+*/
+
+button{
+	background-color:teal;
+	margin-top:20px;
+	border:solid 6px;
+	border-radius:20px;
+}
+
+@-webkit-keyframes turn {
+	from{ 
+		-webkit-transform: rotate(0deg); 
+    } 
+	to{ 
+		-webkit-transform: rotate(360deg); 
+    }
+	
+	from {
+		background-color: red;
+	}
+    to {
+		background-color: purple;
+	}
+}
+
+@keyframes turn{
+	from{ 
+		transform: rotate(0deg);
+    } 
+	to{ 
+		transform: rotate(360deg);
+    }
+	
+	from {
+		background-color: red;
+	}
+    to {
+		background-color: purple;
+	}
+}
+
+td:hover{
+	-webkit-animation-name: turn;
+	animation-name: turn;
+	-webkit-animation-duration: 1s;
+    animation-duration: 1s;
+	
+}
+
+table{
+	margin-left: auto;
+	margin-right: auto;
+}
+
+p{
+	margin-top: 50px;
+}
+
+*{
+	text-align: center;
+	font:bold 20pt monospace;
+	color:antiquewhite;
+	letter-spacing:10px;
+}
+
