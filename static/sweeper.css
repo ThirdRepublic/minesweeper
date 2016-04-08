@@ -7,12 +7,12 @@
 	outline:none;
 }
 
-button,input[type="submit"]{
+.buttonReturn,button,input[type="submit"]{
 	background-color:teal;
 	border-radius:20px;
 }
 
-button#reset,input[type="submit"]{
+button#reset,input#submit{
 	letter-spacing:10px;
 	border:solid 2px;
 	font:bold 20pt monospace;
@@ -27,12 +27,6 @@ h2{
 	font:bold 28pt monospace;
 	letter-spacing:20px;
 	text-align:left;
-}
-
-button.buttonReturn{
-	position:fixed;
-	bottom:1%;
-	right:1%;
 }
 
 table{
@@ -57,16 +51,12 @@ form{
 	color:teal;
 }
 
-/* input[type="radio"]{
-	margin-left:10%;
-} */
-
 button:active,input[type="submit"]:active{
 	color:red;
 	background-color:black;
 }
 
-p,li,button,h1,h2,input[type="submit"]{
+.buttonReturn,p,li,button,h1,h2,input[type="submit"]{
 	color:antiquewhite;
 }
 
@@ -100,6 +90,13 @@ table{
 	margin-top:auto;
 	margin-bottom:auto;
 }
+
+.buttonReturn{
+	position:fixed;
+	bottom:1%;
+	right:1%;
+	font:8pt times;
+}	
 
 body{
 	overflow:hidden;
