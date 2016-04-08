@@ -1,22 +1,39 @@
 /*
 	Robe Zhang
 */
-ROW = 5;
-COL = 5;
-BOMBCOUNT = 2;	
+ROW = 0;
+COL = 0;
+BOMBCOUNT = 0;
+isFirstClick = true;
+
+function Mode(i,j,k){
+	this.ROW = i;
+	this.COL = j;
+	this.BOMBCOUNT = k;
+}	
+
+MODES = new Array(new Mode(8,8,10),new Mode(16,16,40),new Mode(16,30,99));
 
 //Bomb prototype
 function Bomb()
 {
 	this.isRevealed = false;
-	this.isChecked = false;
 	this.isBomb = false;
-	this.isFlagged = false;
+	this.isFlaggedBomb = false;
+	this.isFlaggedQuestion = false;
+	this.isNearBomb = false;
 }
 
-function loadGame()
+function loadGame(level=-1)
 {
 	butEle.innerHTML = "Reload Game";
+	butEle.setAttribute("onclick","loadGame("+level+")");
+	if(level!=-1){
+		ROW = MODES[level].ROW;
+		COL = MODES[level].COL;
+		BOMBCOUNT = MODES[level].BOMBCOUNT;
+	}
+	isFirstClick = true;
 	
 	/* DOUBLE ARRAY
 		0 0 0 
@@ -42,7 +59,7 @@ function loadGame()
 	{
 		tempRow = parseInt(Math.random()*ROW);
 		tempCol = parseInt(Math.random()*COL);
-		(bombs[tempRow][tempCol]).isBomb =true;
+		(bombs[tempRow][tempCol]).isBomb = true;
 	}
 	
 	//Clears other tables
@@ -61,7 +78,7 @@ function loadGame()
 			newCol = document.createElement("td");
 			newRow.appendChild(newCol);
 			newImage = document.createElement("img");
-			newImage.src = "static/blank.png";
+			newImage.src = "blank.jpg";
 			//Test Bomb location
 			// if(bombs[i][j].isBomb)
 				// newImage.src = "bomb.jpg";
@@ -71,52 +88,82 @@ function loadGame()
 			newCol.appendChild(newImage);
 		}	
 	}
-	
 	output.innerHTML = "Number of Bombs: " + BOMBCOUNT;
 }
 
-//Left click to clear, right to flag
+//Left click to clear, right to flag, right again to question
 function reveal(yRow,xCol,event)
 {
-	thisEle = document.getElementById(""+yRow+","+xCol+"");
+	thisEle = document.getElementById(yRow+","+xCol);
+	selectedTile = bombs[yRow][xCol];
 	//left click
 	if(event.button == 0)
 	{
 		document.getElementById(yRow+","+xCol).setAttribute("onmousedown","");
-		bombs[yRow][xCol].isFlagged = false;
+		selectedTile.isFlaggedBomb = false;
+		selectedTile.isFlaggedQuestion = false;
 		//lost game
-		if(bombs[yRow][xCol].isBomb)
+		if(selectedTile.isBomb)
 		{
-			revealBoard();
-			butEle.innerHTML = "GAMEOVER, Click To Try Again";
+			if(isFirstClick){
+				loadGame();
+				reveal(yRow,xCol,event);
+			}
+			else{
+				revealBoard();
+				butEle.innerHTML = "GAMEOVER, Click To Try Again";
+			}
 		}
 		else
 		{
 			//checks nearby tiles for bombs
 			nearByBombs = tileRisk(yRow,xCol);
-			if(nearByBombs>0)
-				thisEle.src = "static/"+nearByBombs+".jpg";
+			if(nearByBombs>0){
+				if(isFirstClick){
+					loadGame();
+					reveal(yRow,xCol,event);
+				}	
+				else{
+					thisEle.src = ""+nearByBombs+".jpg";
+					selectedTile.isNearBomb = true;
+				}
+			}
 			else
 			//reveals a safe
 			{
-				thisEle.src = "0.jpg";
-				//reveals nearby safes
-				check(yRow,xCol);
-				//unchecks 
-				for(var i=0;i<ROW;i++)
-					for(var j=0;j<COL;j++)
-						bombs[i][j].isChecked = false;
+				thisEle.src = "safe.jpg";
+				if(!isTileReveal(yRow,xCol))
+					//reveals nearby safes
+					check(yRow,xCol);
 			}
-			bombs[yRow][xCol].isRevealed = true;		
+			selectedTile.isRevealed = true;		
 		}		
 	}
 	else
 		//right click
 		if(event.button == 2 || event.button == 1)
 		{
-			thisEle.src = "static/-1.jpg";
-			bombs[yRow][xCol].isFlagged = true;
+			//inital declare bomb tile
+			if(selectedTile.isFlaggedBomb == false && selectedTile.isFlaggedQuestion == false)
+			{
+				thisEle.src = "flag.jpg";
+				selectedTile.isFlaggedBomb = true;
+			}	
+			else
+				//declare unsure tile	
+				if(selectedTile.isFlaggedBomb == true)
+				{
+					thisEle.src = "question.jpg";
+					selectedTile.isFlaggedBomb = false;
+					selectedTile.isFlaggedQuestion = true;
+				}
+				//return back to blank tile
+				else{
+					thisEle.src = "blank.jpg";
+					selectedTile.isFlaggedQuestion = false;
+				}
 		}
+	isFirstClick = false;	
 	//checks if game is won
 	if(checkWin())
 	{
@@ -140,7 +187,7 @@ function countBombs()
 	return(countBomb==BOMBCOUNT);
 }
 
-//returns numbre of nearby bombs
+//returns number of nearby bombs
 function tileRisk(yRow,xCol)
 {
 	countRisk = 0;
@@ -160,30 +207,56 @@ function tileRisk(yRow,xCol)
 	return countRisk;
 }
 
+//checks to see if multiple tiles can be revealed
+function isTileReveal(yRow,xCol)
+{
+	for(var i = -1;i<2;i++)
+	{
+		if(yRow+i < 0 || yRow+i >= ROW)
+			continue;	
+		for(var j = -1;j<2;j++)
+		{
+			if(xCol+j < 0 || xCol+j >= COL)
+				continue;
+			if(bombs[yRow+i][xCol+j].isNearBomb)
+				return true;
+		}
+	}
+	return false;
+}
+
 //reveals all safe nearby
 function check(yRow,xCol)
 {	
 	if (confirmVaild(yRow,xCol))
 		return;
+	thisEle = document.getElementById(yRow+","+xCol);
 	bombs[yRow][xCol].isRevealed = true;
-	document.getElementById(""+yRow+","+xCol+"").src = "static/0.jpg";
-	for(var i = -1;i<2;i++)
-	{
-		if(yRow+i < 0 || yRow+i >= ROW)
-			continue;
-		for(var j = -1;j<2;j++)
+	thisEle.setAttribute("onmousedown","");
+	nearByBombs = tileRisk(yRow,xCol);
+	if(nearByBombs>0)
+		thisEle.src = ""+nearByBombs+".jpg";
+	else{
+		thisEle.src = "safe.jpg";
+		for(var i = -1;i<2;i++)
 		{
-			if(xCol+j < 0 || xCol+j >= COL)
+			if(yRow+i < 0 || yRow+i >= ROW)
 				continue;
-			check((yRow+i),(xCol+j));
+			for(var j = -1;j<2;j++)
+			{
+				if(xCol+j < 0 || xCol+j >= COL)
+					continue;
+				check((yRow+i),(xCol+j));
+			}
 		}
 	}
+	
 }
 
 //determines if an area is safe
 function confirmVaild(yRow,xCol)
 {
-	return bombs[yRow][xCol].isRevealed || bombs[yRow][xCol].isChecked || bombs[yRow][xCol].isBomb || tileRisk(yRow,xCol)>0;
+	return bombs[yRow][xCol].isRevealed || bombs[yRow][xCol].isBomb;
 }
 
 //checks if all the non bomb are revealed
@@ -204,12 +277,16 @@ function revealBoard()
 	for(var i = 0;i<ROW;i++)
 		for(var j = 0;j<COL;j++)
 		{
-			tempEle = document.getElementById(""+i+","+j+"");
+			tempEle = document.getElementById(i+","+j);
 			tempEle.setAttribute("onmousedown","");	
+			nearByBombs = tileRisk(i,j);
 			if(bombs[i][j].isBomb)
-				tempEle.src = "static/bomb.jpg";
+				tempEle.src = "bomb.jpg";
 			else
-				tempEle.src = "static/safe.jpg";
+				if(nearByBombs>0)
+					tempEle.src = ""+nearByBombs+".jpg";
+				else
+					tempEle.src = "safe.jpg";
 		}
 }
 
@@ -217,4 +294,3 @@ document.oncontextmenu = function() {
 	return false;
 }
 
-			

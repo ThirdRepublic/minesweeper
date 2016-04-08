@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<!-- Robe Zhang -->
+<html>
+	<head>
+		<title>Robe's Minesweeper</title>
+		<script src="sweeper.js"></script>
+		<link rel="stylesheet" href="sweeper.css">
+		<link rel="icon" href="icon.png"/>
+	</head>
+	<body>
+		<table id="table"></table>
+		<button id="reset" onclick="loadGame(0);">
+			Load Game 
+		</button>
+		<form>
+			<input type="radio" name="level" onclick="butEle.setAttribute('onclick','loadGame(0)')" checked> Beginner</br>
+			<input type="radio" name="level" onclick="butEle.setAttribute('onclick','loadGame(1)')"> Intermediate</br>
+			<input type="radio" name="level" onclick="butEle.setAttribute('onclick','loadGame(2)')"> Expert
+		</form>
+		<p id="num"></p>
+		<a href = "../index.html">
+			<button class = "buttonReturn">
+				<small>
+					Return to Main Menu
+				</small>
+			</button>
+		</a>
+	</body>
+	<script>
+		tableEle = document.getElementById("table");
+		butEle = document.getElementById("reset");
+		output = document.getElementById("num");
+	</script>
+</html>

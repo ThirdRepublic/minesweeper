@@ -2,51 +2,37 @@
 	Robe Zhang
 */
 
-button{
+*{
+	text-align:center;
+	outline:none;
+}
+
+button,input[type="submit"]{
 	background-color:teal;
-	margin-top:20px;
-	border:solid 6px;
 	border-radius:20px;
 }
 
-@-webkit-keyframes turn {
-	from{ 
-		-webkit-transform: rotate(0deg); 
-    } 
-	to{ 
-		-webkit-transform: rotate(360deg); 
-    }
-	
-	from {
-		background-color: red;
-	}
-    to {
-		background-color: purple;
-	}
+button#reset,input[type="submit"]{
+	letter-spacing:10px;
+	border:solid 2px;
+	font:bold 20pt monospace;
 }
 
-@keyframes turn{
-	from{ 
-		transform: rotate(0deg);
-    } 
-	to{ 
-		transform: rotate(360deg);
-    }
-	
-	from {
-		background-color: red;
-	}
-    to {
-		background-color: purple;
-	}
+h1{
+	font:bold 48pt monospace;
+	letter-spacing:10px;
 }
 
-td:hover{
-	-webkit-animation-name: turn;
-	animation-name: turn;
-	-webkit-animation-duration: 1s;
-    animation-duration: 1s;
-	
+h2{
+	font:bold 28pt monospace;
+	letter-spacing:20px;
+	text-align:left;
+}
+
+button.buttonReturn{
+	position:fixed;
+	bottom:1%;
+	right:1%;
 }
 
 table{
@@ -55,13 +41,105 @@ table{
 }
 
 p{
-	margin-top: 50px;
+	width: 1em;
+	font:bold 30pt times;
+	position:fixed;
+	top:35%;
+	left:90%;
 }
 
-*{
-	text-align: center;
-	font:bold 20pt monospace;
+form{
+	position:fixed;
+	top:40%;
+	left:5px;
+	text-align:left;
+	font:bold 18pt times;
+	color:teal;
+}
+
+/* input[type="radio"]{
+	margin-left:10%;
+} */
+
+button:active,input[type="submit"]:active{
+	color:red;
+	background-color:black;
+}
+
+p,li,button,h1,h2,input[type="submit"]{
 	color:antiquewhite;
-	letter-spacing:10px;
 }
 
+ul{
+	list-style-image:url('icon.png');
+	list-style-position:inside;
+	display:inline-block;
+}
+	
+li{
+	text-align:left;
+	font:20pt times;
+	margin-top:5%;
+	color:teal;	
+}	
+
+div{
+	width:30%;
+	margin-left:auto;
+	margin-right:auto;
+	
+}	
+	
+img{
+	display:inline-block;
+	vertical-align:middle;
+}	
+
+table{
+	vertical-align:middle;
+	margin-top:auto;
+	margin-bottom:auto;
+}
+
+body{
+	overflow:hidden;
+}
+	
+@-webkit-keyframes turn {
+	/* from{ 
+		-webkit-transform: rotate(0deg); 
+    } 
+	to{ 
+		-webkit-transform: rotate(360deg); 
+    } */
+	
+	from {
+		background-color:red;
+	}
+    to {
+		background-color:purple;
+	}
+}
+
+@keyframes turn{
+	/* from{ 
+		transform: rotate(0deg);
+    } 
+	to{ 
+		transform: rotate(360deg);
+    } */
+	
+	from {
+		background-color:red;
+	}
+    to {
+		background-color:purple;
+	}
+}
+
+td:hover{
+	-webkit-animation-name:turn;
+	animation-name:turn;
+	-webkit-animation-duration:1s;
+    animation-duration:1s;
+}
