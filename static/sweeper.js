@@ -12,7 +12,37 @@ function Mode(i,j,k){
 	this.BOMBCOUNT = k;
 }	
 
-MODES = new Array(new Mode(8,8,10),new Mode(16,16,40),new Mode(16,30,99));
+MODES = new Array(new Mode(8,8,10),new Mode(16,16,40),new Mode(16,30,99),"");
+
+function createCustom(type=-1){
+	customRow = -1;
+	customCol = -1;
+	customBombCount = -1;
+	//javascript approach
+	while(customRow.isNan||customRow<=0)
+		customRow = parseInt(prompt("Enter in your desired row: ","10"));
+	while(customCol.isNan||customCol<=0)
+		customCol = parseInt(prompt("Enter in your desired column: ","10"));
+	while(customBombCount.isNan||customBombCount>=customRow*customCol||customBombCount<0)
+		customBombCount = parseInt(prompt("Enter in your desired number of bombs: ","10"));
+	MODES[3]=new Mode(customRow,customCol,customBombCount);
+	butEle.setAttribute('onclick','loadGame(3)');
+	//php approach 
+	if(type==-1){	
+		var xhttp;
+		if (window.XMLHttpRequest)
+			xhttp = new XMLHttpRequest();
+		else
+			xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		xhttp.onreadystatechange = function() {
+			if (xhttp.readyState==4&&xhttp.status!=200)
+				xhttp.open("POST","customState.php",true);
+			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			xhttp.send("customRow="+MODES[3].ROW+"&customCol="+MODES[3].COL+"&customBombCount="+MODES[3].BOMBCOUNT);
+		}
+		xhttp.open("POST","static/customState.php",true);
+	}
+}
 
 //Bomb prototype
 function Bomb()

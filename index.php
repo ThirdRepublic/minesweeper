@@ -35,7 +35,8 @@
 			<input type="radio" name="level" value="0" <?php if (!isset($_POST["level"])||$_POST["level"]=="0")echo "checked"?> > Beginner</br>
 			<input type="radio" name="level" value="1" <?php if (isset($_POST["level"])&&$_POST["level"]=="1")echo "checked"?> > Intermediate</br>
 			<input type="radio" name="level" value="2" <?php if (isset($_POST["level"])&&$_POST["level"]=="2")echo "checked"?> > Expert</br>
-			<input id="submit" type="submit" value="Start Game">
+			<input type="radio" name="level" value="3" onclick="createCustom()" <?php if (isset($_POST["level"])&&$_POST["level"]=="3")echo "checked"?> > Custom</br>
+			<input id="reset" type="submit" value="Start Game">
 		</form>
 	</body>
 	<script>
