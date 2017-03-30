@@ -75,36 +75,30 @@ function loadGame(level=-1)
 	
 	//Generates the Rows and Columns and stores bomb objects
 	bombs =  new Array(ROW);
-	{
-		for(var i=0;i<ROW;i++)
-			bombs[i]=new Array(COL);
-		
-		for(var i=0;i<ROW;i++)
-			for(var j=0;j<COL;j++)
-				bombs[i][j] = new Bomb();
-	}
+    for(var i=0;i<ROW;i++)
+        bombs[i]=new Array(COL);
+    
+    for(var i=0;i<ROW;i++)
+        for(var j=0;j<COL;j++)
+            bombs[i][j] = new Bomb();
 
 	//Creates bombs
-	while(!countBombs())
-	{
+	while(!countBombs()){
 		tempRow = parseInt(Math.random()*ROW);
 		tempCol = parseInt(Math.random()*COL);
 		(bombs[tempRow][tempCol]).isBomb = true;
 	}
 	
 	//Clears other tables
-	while(tableEle.firstChild) 
-	{
+	while(tableEle.firstChild){
 		tableEle.removeChild(tableEle.firstChild);
 	}
 	
 	//Generates tags on screen
-	for(var i=0;i<ROW;i++)
-	{
+	for(var i=0;i<ROW;i++){
 		newRow = document.createElement("tr");
 		tableEle.appendChild(newRow);
-		for(var j=0;j<COL;j++)
-		{
+		for(var j=0;j<COL;j++){
 			newCol = document.createElement("td");
             newCol.setAttribute("class","selectable");
             newCol.setAttribute("id","td:"+i+","+j+"");
@@ -130,21 +124,19 @@ function reveal(yRow,xCol,event)
     document.getElementById("td:"+yRow+","+xCol).setAttribute("class","");
 	selectedTile = bombs[yRow][xCol];
 	//left click
-	if(event.button == 0)
-	{
+	if(event.button == 0){
 		document.getElementById(yRow+","+xCol).setAttribute("onmousedown","");
 		selectedTile.isFlaggedBomb = false;
 		selectedTile.isFlaggedQuestion = false;
 		//lost game
-		if(selectedTile.isBomb)
-		{
+		if(selectedTile.isBomb){
 			if(isFirstClick){
 				loadGame();
 				reveal(yRow,xCol,event);
 			}
 			else{
 				revealBoard();
-				butEle.innerHTML = "GAME OVER Click To Try Again";
+				butEle.innerHTML = "GAME OVER Play Again";
 			}
 		}
 		else
@@ -161,10 +153,9 @@ function reveal(yRow,xCol,event)
 					selectedTile.isNearBomb = true;
 				}
 			}
-			else
+			else{
 			//reveals a safe
-			{
-				thisEle.src = "";
+				thisEle.src = "safe.png";
 				if(!isTileReveal(yRow,xCol))
 					//reveals nearby safes
 					check(yRow,xCol);
@@ -174,18 +165,15 @@ function reveal(yRow,xCol,event)
 	}
 	else
 		//right click
-		if(event.button == 2 || event.button == 1)
-		{
+		if(event.button == 2 || event.button == 1){
 			//inital declare bomb tile
-			if(selectedTile.isFlaggedBomb == false && selectedTile.isFlaggedQuestion == false)
-			{
+			if(selectedTile.isFlaggedBomb == false && selectedTile.isFlaggedQuestion == false){
 				thisEle.src = "flag.jpg";
 				selectedTile.isFlaggedBomb = true;
 			}	
 			else
 				//declare unsure tile	
-				if(selectedTile.isFlaggedBomb == true)
-				{
+				if(selectedTile.isFlaggedBomb == true){
 					thisEle.src = "question.jpg";
 					selectedTile.isFlaggedBomb = false;
 					selectedTile.isFlaggedQuestion = true;
@@ -198,8 +186,7 @@ function reveal(yRow,xCol,event)
 		}
 	isFirstClick = false;	
 	//checks if game is won
-	if(checkWin())
-	{
+	if(checkWin()){
 		revealBoard();
 		butEle.innerHTML = "HACKS, Click To Play Again";
 	}
@@ -209,13 +196,10 @@ function reveal(yRow,xCol,event)
 function countBombs()
 {
 	countBomb = 0;
-	for(var i = 0;i<bombs.length;i++)
-	{
+	for(var i = 0;i<bombs.length;i++){
 		for(var j = 0;j<bombs[0].length;j++)
-		{
 			if(bombs[i][j].isBomb)
 				countBomb++;
-		}
 	}
 	return(countBomb==BOMBCOUNT);
 }
@@ -224,13 +208,10 @@ function countBombs()
 function tileRisk(yRow,xCol)
 {
 	countRisk = 0;
-	
-	for(var i = -1;i<2;i++)
-	{
+	for(var i = -1;i<2;i++){
 		if(yRow+i < 0 || yRow+i >= ROW)
 			continue;	
-		for(var j = -1;j<2;j++)
-		{
+		for(var j = -1;j<2;j++){
 			if(xCol+j < 0 || xCol+j >= COL)
 				continue;
 			if(bombs[yRow+i][xCol+j].isBomb)
@@ -243,12 +224,10 @@ function tileRisk(yRow,xCol)
 //checks to see if multiple tiles can be revealed
 function isTileReveal(yRow,xCol)
 {
-	for(var i = -1;i<2;i++)
-	{
+	for(var i = -1;i<2;i++){
 		if(yRow+i < 0 || yRow+i >= ROW)
 			continue;	
-		for(var j = -1;j<2;j++)
-		{
+		for(var j = -1;j<2;j++){
 			if(xCol+j < 0 || xCol+j >= COL)
 				continue;
 			if(bombs[yRow+i][xCol+j].isNearBomb)
@@ -271,13 +250,11 @@ function check(yRow,xCol)
 	if(nearByBombs>0)
 		thisEle.src = ""+nearByBombs+".jpg";
 	else{
-		thisEle.src = "";
-		for(var i = -1;i<2;i++)
-		{
+		thisEle.src = "safe.png";
+		for(var i = -1;i<2;i++){
 			if(yRow+i < 0 || yRow+i >= ROW)
 				continue;
-			for(var j = -1;j<2;j++)
-			{
+			for(var j = -1;j<2;j++){
 				if(xCol+j < 0 || xCol+j >= COL)
 					continue;
 				check((yRow+i),(xCol+j));
@@ -309,9 +286,7 @@ function checkWin()
 function revealBoard()
 {
 	for(var i = 0;i<ROW;i++)
-		for(var j = 0;j<COL;j++)
-		{
-            
+		for(var j = 0;j<COL;j++){ 
 			tempEle = document.getElementById(i+","+j);
 			tempEle.setAttribute("onmousedown","");	
 			nearByBombs = tileRisk(i,j);
@@ -321,7 +296,7 @@ function revealBoard()
 				if(nearByBombs>0)
 					tempEle.src = ""+nearByBombs+".jpg";
 				else
-					tempEle.src = "";
+					tempEle.src = "safe.png";
             document.getElementById("td:"+i+","+j).setAttribute("class","");    
 		}
 }

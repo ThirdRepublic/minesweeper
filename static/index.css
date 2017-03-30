@@ -9,12 +9,6 @@ body {
     padding:0px;
     font-family:'Adelle W01 Bold', serif;    
     background-color:#F0F8FF;
-    -webkit-touch-callout:none;
-    -webkit-user-select:none;
-    -khtml-user-select:none;
-    -moz-user-select:none;
-    -ms-user-select:none;
-    user-select:none;
 }
 *{
 	text-align:center;
@@ -138,12 +132,28 @@ header h2 {
 #githubContainer{
     opacity:.5;
     position:fixed;
-    bottom:2%;
-    right:2%;
+    bottom:10px;
+    right:15px;
 }
 #github{
     height:auto;
-    width:100px;
+    width:75px;
+}
+@-webkit-keyframes explode{
+	0%   {transform:scale(1,1)}
+    25%  {transform:scale(.5,.5)}
+    50%  {transform:scale(.1.1)}
+    100% {transform:scale(1.5,1.5)}
+}
+@keyframes explode{
+	0%   {transform:scale(1,1)}
+    25%  {transform:scale(.5,.5)}
+    50%  {transform:scale(.1.1)}
+    100% {transform:scale(1.5,1.5)}
+}
+.explode{
+	-webkit-animation:explode 30s ease-out;
+    animation:explode 30s ease-out;
 }
 @media(max-height:880px){
     ul{
@@ -153,7 +163,7 @@ header h2 {
         padding-bottom:5px;
     }
 }
-@media(max-width:1030px){
+@media(max-width:1050px){
     h3{
         font-size:50pt;
     }
@@ -171,22 +181,6 @@ header h2 {
     }
     #github{
         height:auto;
-        width:150px;
+        width:100px;
     }
-}
-@-webkit-keyframes explode{
-	0%   {transform: scale(1,1)}
-    25%  {transform: scale(.5,.5)}
-    50%  {transform: scale(.1.1)}
-    100% {transform: scale(1.5,1.5)}
-}
-@keyframes explode{
-	0%   {transform: scale(1,1)}
-    25%  {transform: scale(.5,.5)}
-    50%  {transform: scale(.1.1)}
-    100% {transform: scale(1.5,1.5)}
-}
-.explode{
-	-webkit-animation-name:explode 30s ease-out;
-    animation:explode 30s ease-out;
 }

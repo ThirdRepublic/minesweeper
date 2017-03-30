@@ -32,7 +32,7 @@
                         Right click again to mark <img src="static/question.jpg">
                     </li>
                     <li>
-                        Number denotes the surounding bombs <img src="static/6.jpg">
+                        Number denotes the surounding bombs <img id = "bombCount" src="static/0.jpg">
                     </li>
                     <a href="static/minesweeper.html">
                         <button id ="startGame">
@@ -42,11 +42,12 @@
                 </ul>	
             </div>
         </div>
-        <a id = "githubContainer" href = "https://github.com/ThirdRepublic" onclick="javascript:window.open('https://github.com/ThirdRepublic');">
+        <a id = "githubContainer" onclick="javascript:window.open('https://github.com/ThirdRepublic');">
             <img id = "github" src = "static/github.png"/>
         </a>
 	</body>
 	<script>
+		bombCountEle = document.getElementById("bombCount");
 		tableEle = document.getElementById("table");
 		butEle = document.getElementById("reset");
 		output = document.getElementById("num");
@@ -58,7 +59,7 @@
         var maxPadding = 150;
         var minPadding = 50;
         
-        setInterval(function(){loadMines()}, 10000);   
+        setInterval(function(){loadMines()}, 8000);   
         function loadMines(){
             if(currentMines<mineLimit){
                 var w = (window.innerWidth > 0) ? window.innerWidth : screen.width;
@@ -74,21 +75,27 @@
                 aImg = document.createElement("img");
                 aImg.setAttribute("src","static/mine.png");
                 aImg.setAttribute("class","randomMine");
-                aImg.setAttribute("onload","explode(this)");
+                aImg.setAttribute("onload","denote(this)");
+                aImg.setAttribute("onclick","explode(this)");
                 tempHeight = parseInt(Math.random()*screenHeight+heightPadding/2);
                 tempWidth = parseInt(Math.random()*screenWidth+widthPadding/2);
                 aImg.style.top = tempHeight+"px";
                 aImg.style.left = tempWidth+"px";
                 bodyEle.appendChild(aImg);
                 currentMines++;
+                bombCountEle.setAttribute("src","static/"+currentMines+".jpg");
             }
         }
-        async function explode(which){
+        async function denote(which){
             which.setAttribute("class","explode randomMine");
             await sleep(30000);
+            explode(which);
+            loadMines();
+        }
+        function explode(which){
             bodyEle.removeChild(which);
             currentMines--;
-            loadMines();
+            bombCountEle.setAttribute("src","static/"+currentMines+".jpg");
         }
         function sleep(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));

@@ -3,52 +3,41 @@
 */
 
 @import url('http://fast.fonts.com/cssapi/95b765fd-fae4-4f1b-8155-d8244914a5c6.css');
-.randomMine{
-    position:absolute;
-    z-index:-5;
-    width:10%;
-    min-width:100px;
-    max-width:150px;
-    height:auto;
+#contain:before{
+    background:url(../static/starburst.png)no-repeat;
+    content:'';
+    height:921px;
+    left:50%;
+    margin-left:-461.5px;
+    position:fixed;
+    bottom:40px;
+    width:923px;
+    -webkit-animation:spin 10s infinite linear reverse;
+    animation:spin 10s infinite linear reverse;
+    z-index:-2;
 }
-#contain{
-    background:url(../static/background.png) no-repeat center;
-    height:100vh;
-    position:relative;
+#contain:after{
+    background:url(../static/background.png)no-repeat;
+    content:'';
+    height:634px;
+    left:50%;
+    margin-left:-518.5px;
+    position:fixed;
+    bottom:0%;
+    width:1037px;
+    opacity:0.5;
+    -webkit-animation:rise 1.5s 1 ease;
+    animation:rise 1.5s 1 ease;
+    z-index:-2;
 }
-body { 
-    height:100%; 
-    margin:0px; 
-    padding:0px;
+body{ 
     font-family:'Adelle W01 Bold', serif;    
     background-color:#F0F8FF;
-}
-*{
-	text-align:center;
 }
 .buttonReturn,button{
 	background-color:teal;
 	border-radius:20px;
-}
-h3{
-	font-size:3em;
-	letter-spacing:10px;
-    text-decoration: underline;
-    line-height:0px;
-}
-h3:before{
-    content:"\00a0\00a0";
-}
-h3:after{
-    content:"\00a0\00a0";
-}
-p{
-	width:4em;
-	font:bold 2em times;
-	position:fixed;
-	top:47.5%;
-	left:85%;
-    height:5%;
+    outline:none;
 }
 form{
 	position:fixed;
@@ -56,9 +45,9 @@ form{
     height:20%;
 	left:0%;
 	text-align:left;
-	font:bold 2vw times;
+	font-size:20pt;
 	color:teal;
-    max-width:15%;
+    max-width:200px;
     word-wrap:break-word;
 }
 .buttonReturn:active{
@@ -67,173 +56,177 @@ form{
 }
 .buttonReturn,button{
 	color:antiquewhite;
-}
-ul{
-	list-style-image:url('icon.png');
-	list-style-position:inside;
-	display:inline-block;
-    text-align:center;
-    margin:0;
-    /* width:50%; */
-    padding:0;
-}
-#ulContainer{
-  width: 100vw;
-  height: 90vh;
-  border: 5px solid red;
-  
-    position:
-    display: table-cell;
-    vertical-align:middle;
-}
-li{
-	text-align:center;
-	font-size:2em;
-	color:teal;	
-    line-height:60px;
-}		
-
+}	
 tr img,li img{
-     border-radius:20px;
+    border-radius:20px;
+    display:block; 
+    width:100%; 
+    height:auto; 
 }
-
-li img{
-    vertical-align:middle;
-}
-
 table{
     border-collapse:collapse;
     margin-left:auto;
-	margin-right:auto;
-
-    
+	margin-right:auto;   
 }
 #tablecontainer{
-    height:100vh;
+    height:80vh;
     width:100vw;
     display:table-cell;
-    vertical-align: middle;
+    vertical-align:middle;
+    padding-top:20px;
+    -webkit-user-select:none;
+    user-select:none;
 }
-
 #reset{
-    font:bold 1.5em times;
+    font-size:20pt;
+    font-weight:bold;
 }
-
-#startGame{
-    font:bold 3em times;
-    background-color:#e6ffe6;
-    color:teal;
+#resetContainer{
+    text-align:center;
 }
-
-#startGame:active{
-    background-color:black;
+#numOfMines{
+    text-align:center;
 }
-
 .buttonReturn{
-	position:fixed;
-	bottom:1%;
-	right:1%;
-	font:1em times;
+	position:absolute;
+    top:15px;
+    right:15px;
+    font-size:12pt;
+}
+.strikeout {
+  font-size:20pt;
+  position:relative;
+}
+.strikeout::after {
+  border-bottom:5px solid rgba(0,0,0,.5);
+  content:"";
+  left:0;
+  line-height:1em;
+  margin-top:calc(0.125em / 2 * -1);
+  position:absolute;
+  right:0;
+  top:50%;
 }	
-
-@-webkit-keyframes colorChange{
-	/* from{ 
-		-webkit-transform: rotate(0deg); 
-    } 
-	to{ 
-		-webkit-transform: rotate(360deg); 
-    } */
-	
-	from {
-		background-color:red;
-	}
-    to {
-		background-color:purple;
-	}
-}
-
-@keyframes colorChange{
-	/* from{ 
-		transform: rotate(0deg);
-    } 
-	to{ 
-		transform: rotate(360deg);
-    } */
-	
-	0%   {background-color:red}
-    50%  {background-color:purple}
-    100%  {background-color:red}
-
-}
-
-.selectable:hover{
-	-webkit-animation-name:colorChange;
-	animation-name:colorChange;
-    animation-iteration-count:infinite;
-    -webkit-animation-iteration-count:infinite;
-	-webkit-animation-duration:3s;
-    animation-duration:3s;
-}
-
-
 header h1 {
-    border-top:4px solid #F0F8FF;
+    border-top:10px solid #F0F8FF;
     display:inline-block;
-    min-height:50px;
+    min-height:80px;
     margin:55px auto 0;
-    font-size:91px;
+    font-size:95pt;
     font-weight:bold;
     text-align:center;
     padding:0 10px;
     color:#00374f;
 }
-
 header h1:after {
     background-color:#dd3b2a;
     content:'';
-    height:2px;
+    height:6px;
     left:0;
-    margin-top:-3px;
+    margin-top:-8px;
     position:absolute;
     width:100%;
-    z-index:-1;
-    
+    z-index:-3;
 }
-
 header {
     margin:0 auto;
     max-width:1040px;
     position:relative;
     text-align:center;
-    z-index:1;
+    z-index:-1;
     display:block;
     line-height:0px;
-    
 }
-
 header h2 {
     text-align:right;
     max-width:695px;
     margin:10px auto 0;
     color:#dd3b2a;
-    font-size:22px;
+    font-size:20pt;
     font-style:italic;
     font-weight:400;
 }
-
+@-webkit-keyframes colorChange{
+	0%   {background-color:green}
+    50%  {background-color:purple}
+    100%  {background-color:yellow}
+}
+@keyframes colorChange{
+	0%   {background-color:green}
+    50%  {background-color:purple}
+    100%  {background-color:yellow}
+}
+@-webkit-keyframes rise{
+    from {
+        bottom:-700px;
+    }
+    to {
+        bottom:0px;
+    }
+}
+@keyframes rise{
+    from {
+        bottom:-700px;
+    }
+    to {
+        bottom:0px;
+    }
+}
+@@-webkit-keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
+.selectable:hover{
+	-webkit-animation:colorChange infinite 4s alternate;
+    animation:colorChange infinite 4s alternate;
+}
 #githubContainer{
     opacity:.5;
     position:fixed;
-    bottom:3%;
-    right:2%;
+    bottom:10px;
+    right:15px;
 }
 #github{
     height:auto;
-    width:100px;
+    width:75px;
 }
-@media(max-width:1030px){
+@media(max-width:1050px){
     #github{
         height:auto;
-        width:150px;
+        width:100px;
     }
+    form{
+        font-size:36pt;
+        max-width:20%;
+        word-wrap:break-word;
+        position:fixed;
+        top:40%;
+        height:20%;
+        right:0.5%;
+        left:auto;
+    }
+    table{
+        margin-left:0%;
+        width:80%;
+    }
+    #reset{
+       font-size:25pt; 
+    }
+    .buttonReturn{
+        left:35px;
+        top:140px;
+        font-size:20pt;
+    }	
 }

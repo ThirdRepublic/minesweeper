@@ -8,22 +8,28 @@
 		<link rel="icon" href="icon.png"/>
 	</head>
 	<body>
+        <header>
+			<h1>Minesweeper</h1>
+			<h2>Watch Your <span class="strikeout">Step</span> Click</h2>
+		</header>
         <div id = "contain">
         </div>
             <div id = "tablecontainer">
                 <table id="table"></table>
             </div>
             <form>
-                <input type="radio" name="level" onclick="butEle.setAttribute('onclick','loadGame(0)'),loadGame(0)" checked> Beginner</br>
-                <input type="radio" name="level" onclick="butEle.setAttribute('onclick','loadGame(1)'),loadGame(1)"> Intermediate</br>
-                <input type="radio" name="level" onclick="butEle.setAttribute('onclick','loadGame(2)'),loadGame(2)"> Expert</br>
+                <input type="radio" name="level" onclick="butEle.setAttribute('onclick','loadGame(0)'),loadGame(0)" checked> Novice</br>
+                <input type="radio" name="level" onclick="butEle.setAttribute('onclick','loadGame(1)'),loadGame(1)"> Expert</br>
+                <input type="radio" name="level" onclick="butEle.setAttribute('onclick','loadGame(2)'),loadGame(2)"> Master</br>
                 <!-- <input type="radio" name="level" onclick="createCustom(0)"> Custom -->
-                <button type = "button" id="reset" onclick="loadGame(0)">
-                    Load Game 
-                </button>
+                <div id = "resetContainer">
+                    <button type = "button" id="reset" onclick="loadGame(0)">
+                        Load Game 
+                    </button>
+                </div>
+                <div id="numOfMines"></div>
             </form>
-            <p id="num"></p>
-            <a id = "githubContainer" href = "https://github.com/ThirdRepublic" onclick="javascript:window.open('https://github.com/ThirdRepublic');">
+            <a id = "githubContainer" onclick="javascript:window.open('https://github.com/ThirdRepublic');">
                 <img id = "github" src = "github.png"/>
             </a>
             <a href = "../index.html">
@@ -31,11 +37,10 @@
                     Return to Main Menu
                 </button>
             </a>
-            
 	</body>
 	<script>
 		tableEle = document.getElementById("table");
 		butEle = document.getElementById("reset");
-		output = document.getElementById("num");
+		output = document.getElementById("numOfMines");
 	</script>
 </html>
