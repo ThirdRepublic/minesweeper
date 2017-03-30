@@ -261,7 +261,6 @@ function check(yRow,xCol)
 			}
 		}
 	}
-	
 }
 
 //determines if an area is safe
