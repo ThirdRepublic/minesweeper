@@ -1,1 +1,97 @@
-"Hello" 
+<!DOCTYPE HTML>
+<!-- Robe Zhang -->
+<html>
+	<head>
+		<title>Minesweeper</title>
+		<script src="static/sweeper.js"></script>
+		<link rel="stylesheet" href="static/index.css">
+		<link rel="icon" href="static/icon.png"/>
+        
+	</head>
+	<body>
+        <header>
+			<h1>Minesweeper</h1>
+			<h2>Watch Your <span class="strikeout">Step</span> Click</h2>
+		</header>
+		</br>
+        <div id="ulContainer">
+            <div id="ulContent">
+                <ul>
+                    <h3>Objective</h3>
+                    <li>
+                        Reveal all non-bomb tiles
+                    </li>
+                    <h3>Rules</h3>
+                    <li>
+                        Left click to reveal <img src="static/blank.jpg">
+                    </li>
+                    <li>
+                        Right click to flag <img src="static/flag.jpg">
+                    </li>
+                    <li>
+                        Right click again to mark <img src="static/question.jpg">
+                    </li>
+                    <li>
+                        Number denotes the surounding bombs <img src="static/6.jpg">
+                    </li>
+                    <a href="static/minesweeper.html">
+                        <button id ="startGame">
+                            D'accord
+                        </button>
+                    </a>
+                </ul>	
+            </div>
+        </div>
+        <a id = "githubContainer" href = "https://github.com/ThirdRepublic" onclick="javascript:window.open('https://github.com/ThirdRepublic');">
+            <img id = "github" src = "static/github.png"/>
+        </a>
+	</body>
+	<script>
+		tableEle = document.getElementById("table");
+		butEle = document.getElementById("reset");
+		output = document.getElementById("num");
+        bodyEle = document.getElementsByTagName("body")[0];
+        var mineLimit = 5;
+        var currentMines = 0;
+        var imgPadding = 150;
+        var transformScale = 1.5;
+        var maxPadding = 150;
+        var minPadding = 50;
+        
+        setInterval(function(){loadMines()}, 10000);   
+        function loadMines(){
+            if(currentMines<mineLimit){
+                var w = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+                var h = (window.innerHeight > 0) ? window.innerHeight : screen.height;
+                if(w*.15>transformScale*maxPadding)
+                    imgPadding = maxPadding*transformScale;
+                if(w*.15<transformScale*minPadding)
+                    imgPadding = minPadding*transformScale;
+                var widthPadding = (.1*w < .1*imgPadding) ? .1*imgPadding : .1*w;
+                var heightPadding = (.1*h < .1*imgPadding) ? .1*imgPadding : .1*h;
+                var screenWidth = w-(widthPadding/2+imgPadding);
+                var screenHeight = h-(heightPadding/2+imgPadding);
+                aImg = document.createElement("img");
+                aImg.setAttribute("src","static/mine.png");
+                aImg.setAttribute("class","randomMine");
+                aImg.setAttribute("onload","explode(this)");
+                tempHeight = parseInt(Math.random()*screenHeight+heightPadding/2);
+                tempWidth = parseInt(Math.random()*screenWidth+widthPadding/2);
+                aImg.style.top = tempHeight+"px";
+                aImg.style.left = tempWidth+"px";
+                bodyEle.appendChild(aImg);
+                currentMines++;
+            }
+        }
+        async function explode(which){
+            which.setAttribute("class","explode randomMine");
+            await sleep(30000);
+            bodyEle.removeChild(which);
+            currentMines--;
+            loadMines();
+        }
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+	</script>
+</html>

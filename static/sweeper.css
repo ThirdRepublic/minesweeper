@@ -2,103 +2,141 @@
 	Robe Zhang
 */
 
+@import url('http://fast.fonts.com/cssapi/95b765fd-fae4-4f1b-8155-d8244914a5c6.css');
+.randomMine{
+    position:absolute;
+    z-index:-5;
+    width:10%;
+    min-width:100px;
+    max-width:150px;
+    height:auto;
+}
+#contain{
+    background:url(../static/background.png) no-repeat center;
+    height:100vh;
+    position:relative;
+}
+body { 
+    height:100%; 
+    margin:0px; 
+    padding:0px;
+    font-family:'Adelle W01 Bold', serif;    
+    background-color:#F0F8FF;
+}
 *{
 	text-align:center;
-	outline:none;
 }
-
-.buttonReturn,button,input[type="submit"]{
+.buttonReturn,button{
 	background-color:teal;
 	border-radius:20px;
 }
-
-#reset{
+h3{
+	font-size:3em;
 	letter-spacing:10px;
-	border:solid 2px;
-	font:bold 20pt monospace;
+    text-decoration: underline;
+    line-height:0px;
 }
-
-h1{
-	font:bold 48pt monospace;
-	letter-spacing:10px;
+h3:before{
+    content:"\00a0\00a0";
 }
-
-h2{
-	font:bold 28pt monospace;
-	letter-spacing:20px;
-	text-align:left;
+h3:after{
+    content:"\00a0\00a0";
 }
-
-table{
-	margin-left: auto;
-	margin-right: auto;
-}
-
 p{
-	width: 1em;
-	font:bold 30pt times;
+	width:4em;
+	font:bold 2em times;
 	position:fixed;
-	top:35%;
-	left:90%;
+	top:47.5%;
+	left:85%;
+    height:5%;
 }
-
 form{
 	position:fixed;
 	top:40%;
-	left:5px;
+    height:20%;
+	left:0%;
 	text-align:left;
-	font:bold 18pt times;
+	font:bold 2vw times;
 	color:teal;
+    max-width:15%;
+    word-wrap:break-word;
 }
-
-button:active,input[type="submit"]:active{
+.buttonReturn:active{
 	color:red;
 	background-color:black;
 }
-
-.buttonReturn,p,li,button,h1,h2,input[type="submit"]{
+.buttonReturn,button{
 	color:antiquewhite;
 }
-
 ul{
 	list-style-image:url('icon.png');
 	list-style-position:inside;
 	display:inline-block;
+    text-align:center;
+    margin:0;
+    /* width:50%; */
+    padding:0;
 }
-	
+#ulContainer{
+  width: 100vw;
+  height: 90vh;
+  border: 5px solid red;
+  
+    position:
+    display: table-cell;
+    vertical-align:middle;
+}
 li{
-	text-align:left;
-	font:20pt times;
-	margin-top:5%;
+	text-align:center;
+	font-size:2em;
 	color:teal;	
-}	
+    line-height:60px;
+}		
 
-div{
-	width:30%;
-	margin-left:auto;
-	margin-right:auto;
-	
-}	
-	
-img{
-	display:inline-block;
-	vertical-align:middle;
-}	
+tr img,li img{
+     border-radius:20px;
+}
+
+li img{
+    vertical-align:middle;
+}
 
 table{
-	vertical-align:middle;
-	margin-top:auto;
-	margin-bottom:auto;
+    border-collapse:collapse;
+    margin-left:auto;
+	margin-right:auto;
+
+    
+}
+#tablecontainer{
+    height:100vh;
+    width:100vw;
+    display:table-cell;
+    vertical-align: middle;
+}
+
+#reset{
+    font:bold 1.5em times;
+}
+
+#startGame{
+    font:bold 3em times;
+    background-color:#e6ffe6;
+    color:teal;
+}
+
+#startGame:active{
+    background-color:black;
 }
 
 .buttonReturn{
 	position:fixed;
 	bottom:1%;
 	right:1%;
-	font:8pt times;
+	font:1em times;
 }	
 
-@-webkit-keyframes turn {
+@-webkit-keyframes colorChange{
 	/* from{ 
 		-webkit-transform: rotate(0deg); 
     } 
@@ -114,7 +152,7 @@ table{
 	}
 }
 
-@keyframes turn{
+@keyframes colorChange{
 	/* from{ 
 		transform: rotate(0deg);
     } 
@@ -122,17 +160,80 @@ table{
 		transform: rotate(360deg);
     } */
 	
-	from {
-		background-color:red;
-	}
-    to {
-		background-color:purple;
-	}
+	0%   {background-color:red}
+    50%  {background-color:purple}
+    100%  {background-color:red}
+
 }
 
-td:hover{
-	-webkit-animation-name:turn;
-	animation-name:turn;
-	-webkit-animation-duration:1s;
-    animation-duration:1s;
+.selectable:hover{
+	-webkit-animation-name:colorChange;
+	animation-name:colorChange;
+    animation-iteration-count:infinite;
+    -webkit-animation-iteration-count:infinite;
+	-webkit-animation-duration:3s;
+    animation-duration:3s;
+}
+
+
+header h1 {
+    border-top:4px solid #F0F8FF;
+    display:inline-block;
+    min-height:50px;
+    margin:55px auto 0;
+    font-size:91px;
+    font-weight:bold;
+    text-align:center;
+    padding:0 10px;
+    color:#00374f;
+}
+
+header h1:after {
+    background-color:#dd3b2a;
+    content:'';
+    height:2px;
+    left:0;
+    margin-top:-3px;
+    position:absolute;
+    width:100%;
+    z-index:-1;
+    
+}
+
+header {
+    margin:0 auto;
+    max-width:1040px;
+    position:relative;
+    text-align:center;
+    z-index:1;
+    display:block;
+    line-height:0px;
+    
+}
+
+header h2 {
+    text-align:right;
+    max-width:695px;
+    margin:10px auto 0;
+    color:#dd3b2a;
+    font-size:22px;
+    font-style:italic;
+    font-weight:400;
+}
+
+#githubContainer{
+    opacity:.5;
+    position:fixed;
+    bottom:3%;
+    right:2%;
+}
+#github{
+    height:auto;
+    width:100px;
+}
+@media(max-width:1030px){
+    #github{
+        height:auto;
+        width:150px;
+    }
 }

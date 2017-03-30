@@ -2,28 +2,36 @@
 <!-- Robe Zhang -->
 <html>
 	<head>
-		<title>Robe's Minesweeper</title>
+		<title>Minesweeper</title>
 		<script src="sweeper.js"></script>
 		<link rel="stylesheet" href="sweeper.css">
 		<link rel="icon" href="icon.png"/>
 	</head>
 	<body>
-		<table id="table"></table>
-		<button id="reset" onclick="loadGame(0);">
-			Load Game 
-		</button>
-		<form>
-			<input type="radio" name="level" onclick="butEle.setAttribute('onclick','loadGame(0)')" checked> Beginner</br>
-			<input type="radio" name="level" onclick="butEle.setAttribute('onclick','loadGame(1)')"> Intermediate</br>
-			<input type="radio" name="level" onclick="butEle.setAttribute('onclick','loadGame(2)')"> Expert</br>
-			<input type="radio" name="level" onclick="createCustom(0)"> Custom
-		</form>
-		<p id="num"></p>
-		<a href = "../index.html">
-			<button class = "buttonReturn">
-				Return to Main Menu
-			</button>
-		</a>
+        <div id = "contain">
+        </div>
+            <div id = "tablecontainer">
+                <table id="table"></table>
+            </div>
+            <form>
+                <input type="radio" name="level" onclick="butEle.setAttribute('onclick','loadGame(0)'),loadGame(0)" checked> Beginner</br>
+                <input type="radio" name="level" onclick="butEle.setAttribute('onclick','loadGame(1)'),loadGame(1)"> Intermediate</br>
+                <input type="radio" name="level" onclick="butEle.setAttribute('onclick','loadGame(2)'),loadGame(2)"> Expert</br>
+                <!-- <input type="radio" name="level" onclick="createCustom(0)"> Custom -->
+                <button type = "button" id="reset" onclick="loadGame(0)">
+                    Load Game 
+                </button>
+            </form>
+            <p id="num"></p>
+            <a id = "githubContainer" href = "https://github.com/ThirdRepublic" onclick="javascript:window.open('https://github.com/ThirdRepublic');">
+                <img id = "github" src = "github.png"/>
+            </a>
+            <a href = "../index.html">
+                <button class = "buttonReturn">
+                    Return to Main Menu
+                </button>
+            </a>
+            
 	</body>
 	<script>
 		tableEle = document.getElementById("table");

@@ -1,0 +1,192 @@
+/*
+	Robe Zhang
+*/
+
+@import url('http://fast.fonts.com/cssapi/95b765fd-fae4-4f1b-8155-d8244914a5c6.css');
+body { 
+    height:100%; 
+    margin:0px; 
+    padding:0px;
+    font-family:'Adelle W01 Bold', serif;    
+    background-color:#F0F8FF;
+    -webkit-touch-callout:none;
+    -webkit-user-select:none;
+    -khtml-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+*{
+	text-align:center;
+}
+button{
+   margin-top:50px;
+}
+h3{
+	font-size:3em;
+	letter-spacing:10px;
+    text-decoration:underline;
+    line-height:0px;
+}
+h3:before{
+    content:"\00a0\00a0";
+}
+h3:after{
+    content:"\00a0\00a0";
+}
+#startGame{
+    font-size:3em;
+    background-color:#e6ffe6;
+    color:teal;
+	border-radius:20px;
+    font-weight:bold;
+    outline:none;
+}
+ul{
+	list-style-type:none;
+	display:inline-block;
+    text-align:center;
+    margin:0;
+    padding:0;
+    width:70%;
+}
+#ulContainer{
+    width:100vw;
+    height:100vh;
+    bottom:0%;
+    position:absolute;  
+    z-index:-1;
+}
+#ulContent{
+    width:100vw;
+    height:100vh;
+    display:table-cell;
+    vertical-align:middle; 
+}
+li{
+	text-align:center;
+	font-size:2em;
+	color:teal;	
+    line-height:60px;
+    padding-bottom:15px;
+}		
+li img{
+    border-radius:20px;
+    vertical-align:middle;
+}
+.strikeout {
+  font-size:20pt;
+  position:relative;
+}
+.strikeout::after {
+  border-bottom:5px solid rgba(0,0,0,.5);
+  content:"";
+  left:0;
+  line-height:1em;
+  margin-top:calc(0.125em / 2 * -1);
+  position:absolute;
+  right:0;
+  top:50%;
+}
+header h1 {
+    border-top:10px solid #F0F8FF;
+    display:inline-block;
+    min-height:80px;
+    margin:55px auto 0;
+    font-size:95pt;
+    font-weight:bold;
+    text-align:center;
+    padding:0 10px;
+    color:#00374f;
+}
+header h1:after {
+    background-color:#dd3b2a;
+    content:'';
+    height:6px;
+    left:0;
+    margin-top:-8px;
+    position:absolute;
+    width:100%;
+    z-index:-3;
+}
+header {
+    margin:0 auto;
+    max-width:1040px;
+    position:relative;
+    text-align:center;
+    z-index:-1;
+    display:block;
+    line-height:0px;
+}
+header h2 {
+    text-align:right;
+    max-width:695px;
+    margin:10px auto 0;
+    color:#dd3b2a;
+    font-size:20pt;
+    font-style:italic;
+    font-weight:400;
+}
+.randomMine{
+    position:absolute;
+    width:10%;
+    min-width:50px;
+    max-width:150px;
+    height:auto;
+    opacity:.3;
+}
+#githubContainer{
+    opacity:.5;
+    position:fixed;
+    bottom:2%;
+    right:2%;
+}
+#github{
+    height:auto;
+    width:100px;
+}
+@media(max-height:880px){
+    ul{
+        margin-top:155px;
+    }
+    li{
+        padding-bottom:5px;
+    }
+}
+@media(max-width:1030px){
+    h3{
+        font-size:50pt;
+    }
+    li{
+        font-size:35pt;
+    }
+    header h2,.strikeout{
+        font-size:30pt;
+    }
+    #startGame{
+        font-size:50pt;
+    }
+    li img{
+        height:90px;
+    }
+    #github{
+        height:auto;
+        width:150px;
+    }
+}
+@-webkit-keyframes explode{
+	0%   {transform: scale(1,1)}
+    25%  {transform: scale(.5,.5)}
+    50%  {transform: scale(.1.1)}
+    100% {transform: scale(1.5,1.5)}
+}
+@keyframes explode{
+	0%   {transform: scale(1,1)}
+    25%  {transform: scale(.5,.5)}
+    50%  {transform: scale(.1.1)}
+    100% {transform: scale(1.5,1.5)}
+}
+.explode{
+	-webkit-animation-name:explode 30s ease-out;
+    animation:explode 30s ease-out;
+}
