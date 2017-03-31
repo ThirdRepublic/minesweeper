@@ -14,7 +14,7 @@ body {
 	text-align:center;
 }
 button{
-   margin-top:50px;
+    margin-top:50px;
 }
 h3{
 	font-size:3em;
@@ -155,7 +155,7 @@ header h2 {
 	-webkit-animation:explode 30s ease-out;
     animation:explode 30s ease-out;
 }
-@media(max-height:880px){
+@media(max-height:1050px){
     ul{
         margin-top:155px;
     }
